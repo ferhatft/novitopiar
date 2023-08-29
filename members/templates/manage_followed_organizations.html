@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Followed Organizations{% endblock %}
+
+{% block header %}Manage Followed Organizations{% endblock %}
+
+{% block body %}
+
+<form method="post">
+    {% csrf_token %}
+    <h2>Select Organizations to Follow</h2>
+    
+    {% for org in all_organizations %}
+    <input type="checkbox" name="organizations" value="{{ org.id }}" 
+           {% if org in followed_organizations %}checked{% endif %} >
+    <label>{{ org.name }}</label><br>
+    {% endfor %}
+
+    <input type="submit" value="Update Followed Organizations">
+</form>
+
+{% endblock %}

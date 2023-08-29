@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+<form action="{% url 'organization-filter-page' %}" method="get">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+    <br>
+
+    <label for="org_type">Type:</label>
+    <select multiple name="org_type" id="org_type">
+        <option value="IND">Şahıs</option>
+        <option value="LARGE">Büyük işletme</option>
+        <option value="SME">KOBİ</option>
+        <option value="NGO">STK</option>
+    </select>
+    <br>
+
+    <label for="country">Country:</label>
+    <input type="text" name="country" id="country">
+    <br>
+
+    <label for="start_date">Start Date:</label>
+    <input type="date" name="start_date" id="start_date">
+    <br>
+
+    <label for="end_date">End Date:</label>
+    <input type="date" name="end_date" id="end_date">
+    <br>
+
+    <label for="min_employee_count">Min Employees:</label>
+    <input type="number" name="min_employee_count" id="min_employee_count">
+    <br>
+
+    <label for="max_employee_count">Max Employees:</label>
+    <input type="number" name="max_employee_count" id="max_employee_count">
+    <br>
+
+    <input type="submit" value="Filter">
+</form>
+
+<!-- Display filtered organizations here -->
+{% if organizations %}
+<ul>
+    {% for org in organizations %}
+    <li>{{ org.name }} - {{ org.country }} - {{ org.org_type }} - Founded: {{ org.foundation_date }} - Employees: {{ org.employee_count }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No organizations found.</p>
+{% endif %}
+
+
+{% endblock body %}
